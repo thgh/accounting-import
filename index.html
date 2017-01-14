@@ -16,6 +16,9 @@
     align-items: center;
     background: #eee;
   }
+  textarea {
+   height: 2rem;
+  }
   #input {
     margin-left: 1rem;
   }
@@ -23,14 +26,19 @@
     margin: 0;
     padding: 1rem;
     white-space: pre-wrap;
-    user-select: all;
+    -webkit-user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    user-select: all; 
     overflow: auto;
   }
 </style>
 <form onsubmit="start()">
-  <label>Input</label>
-  <textarea id="input" oninput="start()"></textarea>
-  <button type="submit">Start</button>
+  <p>
+    1. Selecteer alles in Excel
+    2. Kopieer
+  </p>
+  <textarea id="input" oninput="start()" placeholder="3. Plak hier"></textarea>
 </form>
 <pre id="output">
   
