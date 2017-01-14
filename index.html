@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<title>Import</title>
+<style type="text/css">
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+  }
+  form {
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    background: #eee;
+  }
+  #input {
+    margin-left: 1rem;
+  }
+  #output {
+    margin: 0;
+    padding: 1rem;
+    white-space: pre-wrap;
+    user-select: all;
+    overflow: auto;
+  }
+</style>
+<form onsubmit="start()">
+  <label>Input</label>
+  <textarea id="input" oninput="start()"></textarea>
+  <button type="submit">Start</button>
+</form>
+<pre id="output">
+  
+</pre>
+<script>
+var input = document.querySelector('#input')
+var output = document.querySelector('#output')
+function start () {
+  output.innerHTML = input.value.split('\n').map(transform).filter(Boolean).join('\n')
+}
+
+function separator (a, len) {
+  return '\t'
+}
+
+
+function transform (line) {
+  var cells = line.split('\t')
+  if (cells.length < 6) {
+    return
+  }
+  return zeropad(cells[0], 9) +
+    spacepad(cells[1], 200) +
+    spacepad(cells[2], 200) +
+    spacepad(cells[3], 200) +
+    spacepad(cells[4], 200) +
+    zeropad(cells[5], 26)
+}
+
+function zeropad (a, len) {
+  var out = String(a)
+  return len - out.length > 0 ? '0'.repeat(len - out.length) + out : out.slice(0, len)
+}
+
+function spacepad (a, len) {
+  var out = String(a)
+  return len - out.length > 0 ? out + ' '.repeat(len - out.length) : out.slice(0, len)
+}
+
+
+</script>
